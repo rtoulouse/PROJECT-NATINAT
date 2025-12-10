@@ -1,19 +1,14 @@
 from flask import *
 import csv
+from maincreatorcsv import read_csv
 
-def read_csv(file_name):
-    with open(file_name, mode='r') as file:
-        csvFile = csv.reader(file)
-        data = []
-        for lines in csvFile:
-            data.append(lines)
-    return data
+
 
 app = Flask(__name__)
 
 @app.route('/')
 def welcome():
-    return render_template('index.html')
+    return render_template('index_flask.html')
 
 @app.route('/product')
 def product():
