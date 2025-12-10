@@ -7,6 +7,7 @@ import bcrypt
 import os 
 import colorama
 from colorama import Fore, Style
+from ascii import login_ascii, principale_ascii, register_ascii
 
 def connect_to_db():
     try:
@@ -21,18 +22,15 @@ def connect_to_db():
         print(f"Erreur de connexion à la base de données: {e}")
         return None
 
-def principale(connection):
+
+def interface(connection):
     os.system("cls or clear")
+    
+
+def principale(connection):
     while True:
 
-        print(Fore.GREEN + r"""
-    _____                        __________        .__              .__             .__   
-  /     \   ____   ____  __ __  \______   \_______|__| ____   ____ |__|__________  |  |  
- /  \ /  \_/ __ \ /    \|  |  \  |     ___/\_  __ \  |/    \_/ ___\|  \____ \__  \ |  |  
-/    Y    \  ___/|   |  \  |  /  |    |     |  | \/  |   |  \  \___|  |  |_> > __ \|  |__
-\____|__  /\___  >___|  /____/   |____|     |__|  |__|___|  /\___  >__|   __(____  /____/
-        \/     \/     \/                                  \/     \/   |__|       \/         
-        """ + Style.RESET_ALL +"\n")
+        principale_ascii()
 
         print("1. Voir le profil")
         print("2. Se déconnecter")
@@ -53,14 +51,7 @@ def principale(connection):
 
 def login_user(connection):
     try:
-        print(Fore.GREEN + r"""
-.____                 .__        
-|    |    ____   ____ |__| ____  
-|    |   /  _ \ / ___\|  |/    \ 
-|    |__(  <_> ) /_/  >  |   |  \
-|_______ \____/\___  /|__|___|  /
-        \/    /_____/         \/ 
-        """ + Style.RESET_ALL)
+        login_ascii()
 
         username = input("Nom d'utilisateur: ")
         password = getpass("Mot de passe: ")
@@ -92,14 +83,7 @@ def login_user(connection):
 def add_user(connection):
     try:
 
-        print(Fore.GREEN + r"""
-         __________              .__          __                 
-        \______   \ ____   ____ |__| _______/  |_  ___________  
-         |       _// __ \ / ___\|  |/  ___/\   __\/ __ \_  __ \ 
-         |    |   \  ___// /_/  >  |\___ \  |  | \  ___/|  | \/ 
-         |____|_  /\___  >___  /|__/____  > |__|  \___  >__|    
-                 \/     \/_____/         \/            \/        
-        """ + Style.RESET_ALL)
+        register_ascii()
 
         username = input("Nouveau nom d'utilisateur: ")
         password = getpass("Nouveau mot de passe: ")
@@ -144,6 +128,7 @@ def main():
             print("1. Inscription")
             print("2. Login")
             print("3. Quitter")
+            print("4. Interface")
             
             choice = input("\nVotre choix (1-4): ")
             
@@ -154,6 +139,9 @@ def main():
             elif choice == '3':
                 print("Au revoir!")
                 break
+            elif choice == '4':
+                interface(connection)
+
             else:
                 print("Option non valide. Veuillez réessayer.")
                 
